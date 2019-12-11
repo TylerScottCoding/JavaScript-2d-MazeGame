@@ -31,22 +31,16 @@ var gameMap = [
   0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
   0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
-// Creating the tile width and height
 var tileW = 25, tileH = 25;
-// Creating the map width and height
 var mapW = 23, mapH = 23;
-// Creating variables to use to get the framerate
 var currentSecond = 0, frameCount = 0, framesLastSecond = 0, lastFrameTime = 0;
-// Creating booleans to read which arrow key is being pressed in the following order Left, Up, Right, and Down.
 var keysDown = {
 	37 : false,
 	38 : false,
 	39 : false,
 	40 : false
 };
-// Creating a player variable using an instance of Character
 var player = new Character();
-// Creating the Character class which stores movement related information
 function Character()
 {
 	this.tileFrom	= [1,1];
@@ -56,7 +50,6 @@ function Character()
 	this.position	= [25,25];
 	this.delayMove	= 700;
 }
-// Creating placeAt method using the prototype object which helps to place the character and allows for the info to be accessed later
 Character.prototype.placeAt = function(x, y)
 {
 	this.tileFrom	= [x,y];
@@ -64,76 +57,71 @@ Character.prototype.placeAt = function(x, y)
 	this.position	= [((tileW*x)+((tileW-this.dimensions[0])/2)),
 		((tileH*y)+((tileH-this.dimensions[1])/2))];
 };
-// Creating the processMovement method which checks for movement and calculates each frame to find the position
 Character.prototype.processMovement = function(t)
 {
-	// Checks to see if tileFrom and tileTo are the same, if they are there has been no movement
+	
 	if(this.tileFrom[0]==this.tileTo[0] && this.tileFrom[1]==this.tileTo[1]) {
     return false; 
   }
-  	/* Checks if the amount of time passed since the character began moving is equal to or longer than the amout of time it takes to move 1 tile.
-	If it is the characters position is set to its destination using the placeAt method  */
+  	
 	if((t-this.timeMoved)>=this.delayMove)
 	{
 		this.placeAt(this.tileTo[0], this.tileTo[1]);
 	}
-	// If the character is still moving this will calculate the position of the tile the character is moving from
+	
 	else
 	{
 		this.position[0] = (this.tileFrom[0] * tileW) + ((tileW-this.dimensions[0])/2);
 		this.position[1] = (this.tileFrom[1] * tileH) + ((tileH-this.dimensions[1])/2);
-		// Calculates the horizontal movements
+		
 		if(this.tileTo[0] != this.tileFrom[0])
 		{
 			var diff = (tileW / this.delayMove) * (t-this.timeMoved);
 			this.position[0]+= (this.tileTo[0]<this.tileFrom[0] ? 0 - diff : diff);
 		}
-		// Calculates the vertical movements
+		
 		if(this.tileTo[1] != this.tileFrom[1])
 		{
 			var diff = (tileH / this.delayMove) * (t-this.timeMoved);
 			this.position[1]+= (this.tileTo[1]<this.tileFrom[1] ? 0 - diff : diff);
 		}
-		// Rounds the x and y positions (horizontal and vertical) to the nearest whole number
+		
 		this.position[0] = Math.round(this.position[0]);
 		this.position[1] = Math.round(this.position[1]);
 	}
 
 	return true;
 }
-// Creating toIndex function which converts the x and y coordinates to corresponding index's in the gameMap array
+
 function toIndex(x, y)
 {
 	return((y * mapW) + x);
 }
-// Creating the onload function which loads the game when the page is done loading
+
 window.onload = function()
 {
 	ctx = document.getElementById('game').getContext("2d");
 	requestAnimationFrame(drawGame);
 	ctx.font = "bold 10pt sans-serif";
-	// If one of the arrow keys is pressed the corresponding array is set to true
+	
 	window.addEventListener("keydown", function(e) {
 		if(e.keyCode>=37 && e.keyCode<=40) { keysDown[e.keyCode] = true; }
 	e.preventDefault();
 });
-	// Any of the arrow keys that are not pressed are set to false
+	
 	window.addEventListener("keyup", function(e) {
 		if(e.keyCode>=37 && e.keyCode<=40) { keysDown[e.keyCode] = false; }
 	e.preventDefault();
 });
 };
-// Creating the drawgame function
+
 function drawGame()
 {
-	// Checking if the canvas drawing context exists, if not the function is exited
+	
 	if(ctx==null) { return; }
-	// Current time in milliseconds
+	
 	var currentFrameTime = Date.now();
-	// Amount of time in milliseconds since the last fram was processed
 	var timeElapsed = currentFrameTime - lastFrameTime;
-	/* Checks which second it currently is and if its the same as the last frame it adds to the current framecount. 
-	If not framesLastSecond is set to the current frame count, then reset the framecount to 0 and update the current second*/
 	var sec = Math.floor(Date.now()/1000);
 	if(sec!=currentSecond)
 	{
@@ -143,49 +131,37 @@ function drawGame()
 	}
 	else {
 		 frameCount++; }
-	// Checks if the character is moving and if no movements are being processed checks if the character needs new movement instructions
+	
 	if(!player.processMovement(currentFrameTime))
 	{	
-		// Checks if left arrow key is presesd, if true tileTo is updated accordingly allowing for movement
+
 		if(keysDown[38] && player.tileFrom[1]>0 && gameMap[toIndex(player.tileFrom[0], player.tileFrom[1]-1)]==1) {
 			 player.tileTo[1]-= 1; }
-		// Checks if right arrow key is presesd, if true tileTo is updated accordingly allowing for movement
 		else if(keysDown[40] && player.tileFrom[1]<(mapH-1) && gameMap[toIndex(player.tileFrom[0], player.tileFrom[1]+1)]==1) {
 			 player.tileTo[1]+= 1; }
-		// Checks if up arrow key is presesd, if true tileTo is updated accordingly allowing for movement
 		else if(keysDown[37] && player.tileFrom[0]>0 && gameMap[toIndex(player.tileFrom[0]-1, player.tileFrom[1])]==1) {
 			 player.tileTo[0]-= 1; }
-		// Checks if down arrow key is presesd, if true tileTo is updated accordingly allowing for movement
 		else if(keysDown[39] && player.tileFrom[0]<(mapW-1) && gameMap[toIndex(player.tileFrom[0]+1, player.tileFrom[1])]==1) {
 			 player.tileTo[0]+= 1; }
-		// If tileTo is different from tileFrom timeMoved is updated with currentFrameTime
 		if(player.tileFrom[0]!=player.tileTo[0] || player.tileFrom[1]!=player.tileTo[1]){ 
 			player.timeMoved = currentFrameTime; }
 	}
-	// These loops draw the map. The first loop goes down the map row by row
 	for(var y = 0; y < mapH; ++y)
 	{
-		// This loop goes from left to right over each column within the current row
 		for(var x = 0; x < mapW; ++x)
 		{
-			// Finds the current index of the current tile in the gameMap array
 			switch(gameMap[((y*mapW)+x)])
 			{	
-				// If the tile is a "0" it is drawn in a purplish color
 				case 0:
 					ctx.fillStyle = "#666699";
 					break;
-				// If the tile is a "1" (or anything else) it is drawn in black
 				default:
 					ctx.fillStyle = "black";
 			}
-			// draws a filled rectangle with the dimensions set in tileW and tileH with an offset of x*tileW and y*tileH
 			ctx.fillRect( x*tileW, y*tileH, tileW, tileH);
 		}
 	}
-	// Sets the character rectangle to blue
 	ctx.fillStyle = "#0000ff";
-	// Draws the character rectangle 
 	ctx.fillRect(player.position[0], player.position[1],
 		player.dimensions[0], player.dimensions[1]);
 
