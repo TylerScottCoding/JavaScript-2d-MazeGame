@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    body {
+      background-image: radial-gradient(#666699, black);
+      height:2000px;
+    }
+    .nav {
+      border: solid #666699 5px;;
+      position:absolute;
+      left:700px;
+    }
+    a {
+      color:#666699;
+      padding:2px;
+      font-weight:bold;
+      font-size:30px;
+      background-color:darkgrey;
+    }
+    a:hover {
+      color:blue;
+      font-size:40px;
+    }
+    a:active {
+      color:#955DA9;
+    }
+    .about {
+      color:purple;
+    }
+    h1 {
+      color:white;
+    }
+    p {
+      color:white;
+      width:400px;
+    } 
+    #shapes {
+      width: 110px;
+      height:130px;
+      padding: 10px;
+      border: 5px solid #F1C27D;
+      background-color:#F1C27D;
+      position:absolute;
+      top:50px;
+      left:1050px;
+      border-radius:500px;
+    }
+    #eye1 {
+      width:20px;
+      height:20px;
+      border:1px solid black;
+      background-color:white;
+      position:absolute;
+      top:100px;
+      left:1077px;
+      border-radius:500px;
+    }
+    #eye2 {
+      width:20px;
+      height:20px;
+      border:1px solid black;
+      background-color:white;
+      position:absolute;
+      top:100px;
+      left:1138px;
+      border-radius:500px;
+    }
+    #iris1 {
+      width:5px;
+      height:5px;
+      border:1px solid black;
+      background-color:black;
+      position:absolute;
+      top:108px;
+      left:1145px;
+      border-radius:500px;
+    }
+    #iris2 {
+      width:5px;
+      height:5px;
+      border:1px solid black;
+      background-color:black;
+      position:absolute;
+      top:108px;
+      left:1085px;
+      border-radius:500px;
+    }
+    #nose1 {
+      width:0px;
+      height:18px;
+      border:1px solid black;
+      background-color:black;
+      position:absolute;
+      top:130px;
+      left:1113px;
+      border-radius:50px;
+      transform:rotate(15deg);
+    }
+    #nose2 {
+      width:0px;
+      height:12px;
+      border:1px solid black;
+      background-color:black;
+      position:absolute;
+      top:143px;
+      left:1116.5px;
+      border-radius:50px;
+      transform:rotate(90deg);
+    }
+    #mouth1 {
+      width:9px;
+      height:35px;
+      border: 1px solid black;
+      background-color:black;
+      position:absolute;
+      top:160px;
+      left:1115px;
+      border-radius:50px;
+      transform:rotate(90deg);
+    } 
+      </style>
+  </head>
+  <body>
+  <div class="nav">
+  <a class="game" href="index.html">Game</a>
+  <a class="contact" href="gameContact.html">Contact</a>
+  <a class="about" href="aboutGame.html">About</a>
+  </div>
+  <h1>How Does The Game Work?</h1>
+  <p>This game was created as a final project for CSIS 1430. To view a detailed explanation on how the game works as well as how to do this yourself go back to the "game" page. Once there you can right click anywhere on the page and click the "Source Code" button. This will display the source code along with comments detailing most lines of code. Not only was this done for the viewer but I have a tendency to forget why I wrote lines the way I did and often find myself questioning why I didn't write it differently only to spend several minutes reading through the code to find out I needed to do it a specific way to account for something else I did. JavaScript is not a language I use often so I know there are ways I could have improved on along with features I could have added. I am by no means a designer so while the website may not be beautiful, it functions exactly how intended which is more-so my goal than trying to design something visually appealing. Lastly, here are some random things I decided to add to make sure I hit all the points needed for this assignment.</p>
+
+  <div id="shapes"></div>
+  <div id="eye1"></div>
+  <div id="eye2"></div>
+  <div id="iris1"></div>
+  <div id="iris2"></div>
+  <div id="nose1"></div>
+  <div id="nose2"></div>
+  <div id="mouth1"></div> 
+
+  </body>
+</html>

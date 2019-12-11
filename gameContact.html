@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact</title>
+  <style>
+body {
+  background-image: radial-gradient(#666699, black);
+  height:2000px;
+}
+.nav {
+  border: solid #666699 5px;;
+  position:absolute;
+  left:700px;
+}
+a {
+  color:#666699;
+  padding:2px;
+  font-weight:bold;
+  font-size:30px;
+  background-color:darkgrey;
+}
+a:hover {
+  color:blue;
+  font-size:40px;
+}
+a:active {
+  color:#955DA9;
+}
+.contact {
+  color:purple;
+}
+.container {
+  width:500px;
+  position:absolute;
+  top:100px;
+  left:700px;
+}
+label {
+  color:#DDDDDD;
+  font-weight:bold;
+  font-size:20px;
+}
+.button {
+  width:90px;
+  height:30px;
+  font-weight:bold;
+  border:solid black;
+  position:absolute;
+  font-size:27px;
+  top:505px;
+  left:697px;
+}
+.button:hover {
+  font-size:27px;
+}
+
+  </style>
+  </head>
+  <body>
+    <div class="nav">
+  <a class="game" href="index.html">Game</a>
+  <a class="contact" href="gameContact.html">Contact</a>
+  <a class="about" href="aboutGame.html">About</a>
+</div>
+   <div class="container">
+  <form action="action_page.php">
+
+    <label for="fname">First Name</label><br>
+    <input type="text" id="fname" name="firstname" placeholder="Your name.." style="width:400px;height:30px;"><br>
+
+    <label for="lname">Last Name</label><br>
+    <input type="text" id="lname" name="lastname" placeholder="Your last name.." style="width:400px;height:30px;"><br>
+
+    <label for="country">Country</label><br>
+    <select id="country" name="country" style="width:400px;height:30px;">
+      <option value="australia">USA</option>
+      <option value="canada">Canada</option>
+      <option value="usa">Mexico</option>
+    </select><br>
+
+    <label for="subject">Subject</label><br>
+    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px;width:400px;"></textarea><br>
+
+  </form>
+</div>
+<a class="button" href="contactThanks.html">Submit</a>
+  </body>
+</html>
